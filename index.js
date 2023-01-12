@@ -7,7 +7,7 @@ db.connect(err => {
     employee_tracker();
 });
 
-var employee_tracker = function () {
+const employee_tracker = function () {
     inquirer.prompt([{
         type: 'list',
         name: 'prompt',
