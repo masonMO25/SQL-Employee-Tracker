@@ -40,14 +40,6 @@ const employee_tracker = function () {
                 type: 'input',
                 name: 'department',
                 message: 'What is the name of the department?',
-                validate: departmentInput => {
-                    if (departmentInput) {
-                        return true;
-                    } else {
-                        console.log('Please add a department!');
-                        return false;
-                    }
-                }
             }]).then((answers) => {
                 db.query(`INSERT INTO department (name) VALUES (?)`, [answers.department], (err, result) => {
                     if (err) throw err;
@@ -64,14 +56,6 @@ const employee_tracker = function () {
                         type: 'input',
                         name: 'role',
                         message: 'What is the name of the role?',
-                        validate: roleInput => {
-                            if (roleInput) {
-                                return true;
-                            } else {
-                                console.log('Add a role:');
-                                return false;
-                            }
-                        }
                     },
                     {
                         type: 'input',
@@ -121,27 +105,11 @@ const employee_tracker = function () {
                         type: 'input',
                         name: 'firstName',
                         message: 'What is the employees first name?',
-                        validate: firstNameInput => {
-                            if (firstNameInput) {
-                                return true;
-                            } else {
-                                console.log('Add a first name!');
-                                return false;
-                            }
-                        }
                     },
                     {
                         type: 'input',
                         name: 'lastName',
                         message: 'What is the employees last name?',
-                        validate: lastNameInput => {
-                            if (lastNameInput) {
-                                return true;
-                            } else {
-                                console.log('Add a salary!');
-                                return false;
-                            }
-                        }
                     },
                     {
                         type: 'list',
@@ -160,14 +128,6 @@ const employee_tracker = function () {
                         type: 'input',
                         name: 'manager',
                         message: 'Who is the employees manager?',
-                        validate: managerInput => {
-                            if (managerInput) {
-                                return true;
-                            } else {
-                                console.log('Add a manager!');
-                                return false;
-                            }
-                        }
                     }
                 ]).then((answers) => {
                     for (var i = 0; i < result.length; i++) {

@@ -1,4 +1,3 @@
-import config from "../config.js";
 import mysql from "mysql2";
 
 const db = mysql.createConnection({
@@ -7,4 +6,5 @@ const db = mysql.createConnection({
   password: 'password',
   database: 'etracker_db'
 });
+
 export default db
