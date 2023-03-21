@@ -1,6 +1,5 @@
 import inquirer from 'inquirer';
 import db from './db/conn.js';
-import cTable from 'console.table'
 
 db.connect(err => {
     if (err) throw err;
@@ -19,7 +18,7 @@ const employee_tracker = function () {
             db.query(`SELECT * FROM departments`, (err, result) => {
                 if (err) throw err;
                 console.log("Viewing all departments: ");
-                console.log(cTable);
+                console.table(result);
                 employee_tracker();
             });
         } else if (answers.prompt === 'View all roles') {
@@ -42,9 +41,9 @@ const employee_tracker = function () {
                 name: 'departments',
                 message: 'What is the name of the department?',
             }]).then((answers) => {
-                db.query(`INSERT INTO department (name) VALUES (?)`, [answers.departments], (err, result) => {
+                db.query(`INSERT INTO department (name) VALUES (?)`, [answers.department], (err, result) => {
                     if (err) throw err;
-                    console.log(`Added ${answers.departments} to the database.`)
+                    console.log(`Added ${answers.department} to the database.`)
                     employee_tracker();
                 });
             })
@@ -85,14 +84,14 @@ const employee_tracker = function () {
                     }
                 ]).then((answers) => {
                     for (var i = 0; i < result.length; i++) {
-                        if (result[i].name === answers.departments) {
+                        if (result[i].name === answers.department) {
                             var department = result[i];
                         }
                     }
 
                     db.query(`INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`, [answers.role, answers.salary, department.id], (err, result) => {
                         if (err) throw err;
-                        console.log(`Added ${answers.roles} to the database.`)
+                        console.log(`Added ${answers.role} to the database.`)
                         employee_tracker();
                     });
                 })
@@ -132,7 +131,7 @@ const employee_tracker = function () {
                     }
                 ]).then((answers) => {
                     for (var i = 0; i < result.length; i++) {
-                        if (result[i].title === answers.roles) {
+                        if (result[i].title === answers.role) {
                             var role = result[i];
                         }
                     }
@@ -188,7 +187,7 @@ const employee_tracker = function () {
                         }
                     }
 
-                    db.query(`UPDATE employee SET ? WHERE ?`, [{role_id: roles}, {last_name: name}], (err, result) => {
+                    db.query(`UPDATE employee SET ? WHERE ?`, [{role_id: role}, {last_name: name}], (err, result) => {
                         if (err) throw err;
                         console.log(`Updated ${answers.employees} role to the database.`)
                         employee_tracker();
