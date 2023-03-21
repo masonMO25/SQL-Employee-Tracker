@@ -194,7 +194,7 @@ const employee_tracker = function () {
                     });
                 })
             });
-        } else if (answers.prompt === 'log out') {
+        } else if (answers.prompt === 'Log Out') {
             db.end();
         }
     })
